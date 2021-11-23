@@ -1,0 +1,19 @@
+.Progress {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 0 .1em .5em 0 rgba(0, 0, 0, .1);
+  margin: .5em; // tmp
+
+  .title {
+    margin: 0 0 .5rem 0;
+    font-size: 1.1em;
+    color: #555;
+  }
+
+  .progress-container {
+    border: 1px solid rgba(0, 0, 0, .05);
+    border-radius: .375em;
+    background-color: #e8eaf6;
+  }
+}
