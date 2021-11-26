@@ -1,31 +1,34 @@
-import { styled } from '@mui/material/styles'
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import "../sass/Progress.scss"
 import { IconButton } from '@mui/material'
-import { MdAdd } from 'react-icons/all'
+import { MdAdd, MdRemove } from 'react-icons/all'
+import ProgressBar from './ProgressBar'
 
-const CustomLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 20,
-    borderRadius: '.375em',
-    [`&.${ linearProgressClasses.colorPrimary }`]: {
-        backgroundColor: 'transparent', //theme.palette.grey[theme.palette.mode === 'light' ? 300 : 800]
-    },
-    [`& .${ linearProgressClasses.bar }`]: {
-        borderRadius: '.375em',
-        backgroundColor: theme.palette.primary, // theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8'
-    },
-}))
 
-const Progress = ({ progress }) =>
+const Progress = ({ data, increment }) =>
 {
+    const inc = e => increment(data.id, +1)
+    const dec = e => increment(data.id, -1)
+
     return (
         <div className="Progress">
-            <h3 className="title">{ progress.title }</h3>
-            <IconButton>
-                <MdAdd/>
-            </IconButton>
+            <div className="head">
+                <h3 className="title">
+                    { data.title }
+                    <span className="advance">
+                        {data.advance}/{data.goal}
+                    </span>
+                </h3>
+                <div className="options">
+                    <IconButton color="secondary" onClick={ dec }>
+                        <MdRemove/>
+                    </IconButton>
+                    <IconButton color="primary" onClick={ inc }>
+                        <MdAdd/>
+                    </IconButton>
+                </div>
+            </div>
             <div className="progress-container">
-                <CustomLinearProgress variant="determinate" value={ progress.advance }/>
+                <ProgressBar value={ data.advance } max={ data.goal }/>
             </div>
         </div>
     )
